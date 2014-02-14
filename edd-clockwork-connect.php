@@ -3,7 +3,7 @@
  * Plugin Name:		Easy Digital Downloads - Clockwork Connect
  * Plugin URI:		https://easydigitaldownloads.com/extension/clockwork-connect
  * Description:		Get real-time SMS notifications from Clockwork when you make sales!
- * Version:			1.2.0
+ * Version:			1.1.0
  * Author:			Daniel J Griffiths
  * Author URI:		http://section214.com
  * Text Domain:		edd-clockwork-connect
@@ -68,7 +68,7 @@ if( !class_exists( 'EDD_Clockwork_Connect' ) ) {
 			define( 'CLOCKWORK_CONNECT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 			// Plugin version
-			define( 'CLOCKWORK_CONNECT_PLUGIN_VER', '1.2.0' );
+			define( 'CLOCKWORK_CONNECT_PLUGIN_VER', '1.1.0' );
 		}
 
 
@@ -76,7 +76,7 @@ if( !class_exists( 'EDD_Clockwork_Connect' ) ) {
 		 * Include necessary files
 		 *
 		 * @access		private
-		 * @since		1.2.0
+		 * @since		1.1.0
 		 * @return		void
 		 */
 		private function includes() {
@@ -145,7 +145,7 @@ if( !class_exists( 'EDD_Clockwork_Connect' ) ) {
 		 * Modify plugin metalinks
 		 *
 		 * @access		public
-		 * @since		1.2.0
+		 * @since		1.1.0
 		 * @param		array $links The current links array
 		 * @param		string $file A specific plugin table entry
 		 * @return		array $links The modified links array
@@ -340,7 +340,7 @@ add_action( 'plugins_loaded', 'EDD_Clockwork_Connect_load' );
 /**
  * We need Easy Digital Downloads... if it isn't present, notify the user!
  *
- * @since		1.2.0
+ * @since		1.1.0
  * @return		void
  */
 function EDD_Clockwork_Connect_missing_edd_notice() {
