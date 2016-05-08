@@ -105,7 +105,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 		 */
 		private function hooks() {
             // Handle licensing
-			$license = edd_get_option( 'edd_twilio_connect_license', false );
+			$license = edd_get_option( 'edd_clockwork_connect_license', false );
 
 			if( $license ) {
 				$update = new S214_Plugin_Updater( 'https://section214.com', __FILE__, array(
