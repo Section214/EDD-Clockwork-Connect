@@ -109,7 +109,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 
 			if( $license ) {
 				$update = new S214_Plugin_Updater( 'https://section214.com', __FILE__, array(
-					'version' => TWILIO_CONNECT_VER,
+					'version' => EDD_CLOCKWORK_CONNECT_VER,
 					'license' => $license,
 					'item_id' => 243,
 					'author'  => 'Daniel J Griffiths'
