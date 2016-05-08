@@ -71,7 +71,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 			define( 'EDD_CLOCKWORK_CONNECT_URL', plugin_dir_url( __FILE__ ) );
 
 			// Plugin version
-			define( 'EDD_CLOCKWORK_CONNECT_VER', '1.1.0' );
+			define( 'EDD_CLOCKWORK_CONNECT_VER', '1.1.1' );
 		}
 
 
