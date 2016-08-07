@@ -107,9 +107,17 @@ function edd_clockwork_connect_send_sms( $message ) {
 				if( $result['success'] ) {
 					return;
 				} else {
+					if( edd_getresponse()->debugging ) {
+						s214_debug_log_error( 'SMS Error', 'Failed to send SMS:<br />' . print_r( $result, true ), 'EDD Clickatell Connect' );
+					}
+
 					return $result['error_message'];
 				}
 			} catch( ClockworkException $e ) {
+				if( edd_getresponse()->debugging ) {
+					s214_debug_log_error( 'SMS Error', 'Failed to send SMS: ' . $e->getMessage(), 'EDD Clickatell Connect' );
+				}
+
 				return $e->getMessage();
 			}
 		}

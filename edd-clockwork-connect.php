@@ -36,6 +36,14 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 		 */
 		private static $instance;
 
+
+		/**
+		 * @var         bool $debugging Whether or not debugging is available
+		 * @since       1.0.2
+		 */
+		public $debugging = false;
+
+
 		/**
 		 * Get active instance
 		 *
@@ -50,6 +58,12 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 				self::$instance->includes();
 				self::$instance->load_textdomain();
 				self::$instance->hooks();
+
+				if( class_exists( 'S214_Debug' ) ) {
+					if( edd_get_option( 'edd_clockwork_connect_enable_debug', false ) ) {
+						self::$instance->debugging = true;
+					}
+				}
 			}
 
 			return self::$instance;
@@ -111,7 +125,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 				$update = new S214_Plugin_Updater( 'https://section214.com', __FILE__, array(
 					'version' => EDD_CLOCKWORK_CONNECT_VER,
 					'license' => $license,
-					'item_id' => 243,
+					'item_id' => 842,
 					'author'  => 'Daniel J Griffiths'
 				) );
 			}

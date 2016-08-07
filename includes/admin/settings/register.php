@@ -37,7 +37,7 @@ add_filter( 'edd_settings_sections_extensions', 'edd_clockwork_connect_add_setti
  */
 function edd_clockwork_connect_register_settings( $settings ) {
 	$new_settings = array(
-		'clockwork-connect' => array(
+		'clockwork-connect' => apply_filters( 'edd_clockwork_connect_settings', array(
 			array(
 				'id'   => 'edd_clockwork_connect_settings',
 				'name' => '<strong>' . __( 'Clockwork Connect Settings', 'edd-clockwork-connect' ) . '</strong>',
@@ -64,7 +64,7 @@ function edd_clockwork_connect_register_settings( $settings ) {
 				'desc' => __( 'Select whether or not you want itemized SMS notifications', 'edd-clockwork-connect' ),
 				'type' => 'checkbox'
 			)
-		)
+		) )
 	);
 
 	return array_merge( $settings, $new_settings );
@@ -72,6 +72,44 @@ function edd_clockwork_connect_register_settings( $settings ) {
 add_filter( 'edd_settings_extensions', 'edd_clockwork_connect_register_settings', 1 );
 
 
+/**
+ * Add debug option if the S214 Debug plugin is enabled
+ *
+ * @since       1.1.2
+ * @param       array $settings The current settings
+ * @return      array $settings The updated settings
+ */
+function edd_clockwork_connect_add_debug( $settings ) {
+	if( class_exists( 'S214_Debug' ) ) {
+		$debug_setting[] = array(
+			'id'   => 'edd_clockwork_connect_debugging',
+			'name' => '<strong>' . __( 'Debugging', 'edd-clockwork-connect' ) . '</strong>',
+			'desc' => '',
+			'type' => 'header'
+		);
+
+		$debug_setting[] = array(
+			'id'   => 'edd_clockwork_connect_enable_debug',
+			'name' => __( 'Enable Debug', 'edd-clockwork-connect' ),
+			'desc' => sprintf( __( 'Log plugin errors. You can view errors %s.', 'edd-clockwork-connect' ), '<a href="' . admin_url( 'tools.php?page=s214-debug-logs' ) . '">' . __( 'here', 'edd-clockwork-connect' ) . '</a>' ),
+			'type' => 'checkbox'
+		);
+
+		$settings = array_merge( $settings, $debug_setting );
+	}
+
+	return $settings;
+}
+add_filter( 'edd_clockwork_connect_settings', 'edd_clockwork_connect_add_debug' );
+
+
+/**
+ * Add license setting
+ *
+ * @since       1.1.1
+ * @param       array $settings The current settings
+ * @return      array $settings The updated settings
+ */
 function edd_clockwork_connect_register_license_settings( $settings ) {
 	$new_settings = array(
 		'edd_clockwork_connect_license' => array(
