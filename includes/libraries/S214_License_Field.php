@@ -40,11 +40,20 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 				switch( $license->error ) {
 					case 'expired' :
 
-						$class = 'error';
+					$class = 'expired';
 						$messages[] = sprintf(
-							__( 'Your license key expired on %s. Please <a href="%s" target="_blank" title="Renew your license key">renew your license key</a>.', 'section214-license' ),
+							__( 'Your license key expired on %s. Please <a href="%s" target="_blank">renew your license key</a>.', 'section214-license' ),
 							date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
 							'https://section214.com/checkout/?edd_license_key=' . $value . '&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
+						);
+						$license_status = 'license-' . $class . '-notice';
+						break;
+					case 'revoked' :
+
+						$class = 'error';
+						$messages[] = sprintf(
+							__( 'Your license key has been disabled. Please <a href="%s" target="_blank">contact support</a> for more information.', 'section214-license' ),
+							'https://section214.com/contact?utm_campaign=admin&utm_source=licenses&utm_medium=revoked'
 						);
 
 						$license_status = 'license-' . $class . '-notice';
@@ -55,7 +64,7 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 
 						$class = 'error';
 						$messages[] = sprintf(
-							__( 'Invalid license. Please <a href="%s" target="_blank" title="Visit account page">visit your account page</a> and verify it.', 'section214-license' ),
+							__( 'Invalid license. Please <a href="%s" target="_blank">visit your account page</a> and verify it.', 'section214-license' ),
 							'https://section214.com/your-account?utm_campaign=admin&utm_source=licenses&utm_medium=missing'
 						);
 
@@ -68,7 +77,7 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 
 						$class = 'error';
 						$messages[] = sprintf(
-							__( 'Your %s is not active for this URL. Please <a href="%s" target="_blank" title="Visit account page">visit your account page</a> to manage your license key URLs.', 'section214-license' ),
+							__( 'Your %s is not active for this URL. Please <a href="%s" target="_blank">visit your account page</a> to manage your license key URLs.', 'section214-license' ),
 							$args['name'],
 							'https://section214.com/your-account?utm_campaign=admin&utm_source=licenses&utm_medium=invalid'
 						);
@@ -94,6 +103,10 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 						$license_status = 'license-' . $class . '-notice';
 
 						break;
+
+					default:
+						$messages[] = print_r( $license, true );
+						break;
 				}
 			} else {
 				switch( $license->license ) {
@@ -115,7 +128,7 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 						} elseif( $expiration > $now && $expiration - $now < ( DAY_IN_SECONDS * 30 ) ) {
 
 							$messages[] = sprintf(
-								__( 'Your license key expires soon! It expires on %s. <a href="%s" target="_blank" title="Renew license">Renew your license key</a>.', 'section214-license' ),
+								__( 'Your license key expires soon! It expires on %s. <a href="%s" target="_blank">Renew your license key</a>.', 'section214-license' ),
 								date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
 								'https://section214.com/checkout/?edd_license_key=' . $value . '&utm_campaign=admin&utm_source=licenses&utm_medium=renew'
 							);
@@ -155,7 +168,7 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 
 		if( ! empty( $messages ) ) {
 			foreach( $messages as $message ) {
-				$html .= '<div class="edd-license-data edd-license-' . $class . '">';
+				$html .= '<div class="edd-license-data edd-license-' . $class . ' ' . $license_status . '">';
 				$html .= '<p>' . $message . '</p>';
 				$html .= '</div>';
 
@@ -164,10 +177,6 @@ if ( ! function_exists( 'edd_s214_license_key_callback' ) ) {
 
 		wp_nonce_field( edd_sanitize_key( $args['id'] ) . '-nonce', edd_sanitize_key( $args['id'] ) . '-nonce' );
 
-		if( isset( $license_status ) ) {
-			echo '<div class="' . $license_status . '">' . $html . '</div>';
-		} else {
-			echo '<div class="license-null">' . $html . '</div>';
-		}
+		echo $html;
 	}
 }

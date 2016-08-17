@@ -115,7 +115,7 @@ function edd_clockwork_connect_register_license_settings( $settings ) {
 		'edd_clockwork_connect_license' => array(
 			'id'   => 'edd_clockwork_connect_license',
 			'name' => __( 'Clockwork Connect', 'edd-clockwork-connect' ),
-			'desc' => sprintf( __( 'Enter your Clockwork Connect license key. This is required for automatic updates and <a href="%s">support</a>.' ), 'https://section214.com/contact' ),
+			'desc' => '',
 			'type' => 's214_license_key'
 		)
 	);
