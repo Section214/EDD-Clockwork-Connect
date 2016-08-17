@@ -3,7 +3,7 @@
  * Plugin Name:     Easy Digital Downloads - Clockwork Connect
  * Plugin URI:      https://section214.com/product/edd-clockwork-connect
  * Description:     Get real-time SMS notifications from Clockwork when you make sales!
- * Version:         1.1.2
+ * Version:         1.1.3
  * Author:          Daniel J Griffiths
  * Author URI:      https://section214.com
  * Text Domain:     edd-clockwork-connect
@@ -85,7 +85,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 			define( 'EDD_CLOCKWORK_CONNECT_URL', plugin_dir_url( __FILE__ ) );
 
 			// Plugin version
-			define( 'EDD_CLOCKWORK_CONNECT_VER', '1.1.2' );
+			define( 'EDD_CLOCKWORK_CONNECT_VER', '1.1.3' );
 		}
 
 
