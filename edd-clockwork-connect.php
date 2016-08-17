@@ -118,7 +118,7 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 		 * @return      void
 		 */
 		private function hooks() {
-            // Handle licensing
+			// Handle licensing
 			$license = edd_get_option( 'edd_clockwork_connect_license', false );
 
 			if( $license ) {
@@ -129,17 +129,17 @@ if( ! class_exists( 'EDD_Clockwork_Connect' ) ) {
 					'author'  => 'Daniel J Griffiths'
 				) );
 			}
-        }
+		}
 
 
-        /**
-         * Internationalization
-         *
-         * @access      public
-         * @since       1.1.0
-         * @return      void
-         */
-        public function load_textdomain() {
+		/**
+		 * Internationalization
+		 *
+		 * @access      public
+		 * @since       1.1.0
+		 * @return      void
+		 */
+		public function load_textdomain() {
 			// Set filter for language directory
 			$lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
 			$lang_dir = apply_filters( 'edd_clockwork_connect_lang_directory', $lang_dir );
@@ -182,8 +182,9 @@ function edd_clockwork_connect() {
 
 		$activation = new S214_EDD_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
 		$activation = $activation->run();
-	} else {
-		return EDD_Clockwork_Connect::instance();
+		return;
 	}
+
+	return EDD_Clockwork_Connect::instance();
 }
 add_action( 'plugins_loaded', 'edd_clockwork_connect' );
