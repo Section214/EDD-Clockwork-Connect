@@ -66,7 +66,7 @@ function edd_clockwork_connect_build_sms( $payment_id ) {
 
 				foreach( $messages as $message ) {
 					$message = $count . '/' . $max . urldecode( '%0a' ) . $message;
-					$error = edd_clockwork_connect_send_sms( $message );
+					$error   = edd_clockwork_connect_send_sms( $message );
 				}
 			} else {
 				$error = edd_clockwork_connect_send_sms( $message );
